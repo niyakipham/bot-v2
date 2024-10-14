@@ -1,10 +1,18 @@
-import os, discord
+import os
+import discord
+
 from discord.ext import commands
 
 # Khởi tạo intents
 intents = discord.Intents.default()
 intents.message_content = True
 
+# Lazy import aiohttp
+def get_aiohttp_client():
+    import aiohttp
+    return aiohttp.ClientSession()
+
+    
 # Tạo một instance bot
 bot = commands.Bot(command_prefix='!', intents=intents)
 
