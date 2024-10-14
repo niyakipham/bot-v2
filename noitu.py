@@ -1,7 +1,9 @@
 import os
 import discord
-
+from .client import *
 from discord.ext import commands
+from . import hdrs, http, payload
+from .base_protocol import BaseProtocol
 
 # Khởi tạo intents
 intents = discord.Intents.default()
@@ -12,7 +14,7 @@ def get_aiohttp_client():
     import aiohttp
     return aiohttp.ClientSession()
 
-    
+
 # Tạo một instance bot
 bot = commands.Bot(command_prefix='!', intents=intents)
 
