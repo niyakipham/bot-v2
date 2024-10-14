@@ -36,9 +36,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Deploy bot
         run: |
-          python noitu.py &
-          python haiten.py &
-          python nt.py &
+          python noitu.py 
           sleep 21600 # Giữ bot hoạt động trong 3600 giây (1 giờ)
         env:
           NOITU_TOKEN: ${{ secrets.NOITU_TOKEN }}
