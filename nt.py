@@ -1,7 +1,7 @@
-from discord.ext import commands, tasks
 import requests, discord
 import random
 import os
+from discord.ext import commands, tasks
 
 # ID kênh bạn muốn gửi ảnh
 CHANNEL_ID = 1295293677828309032 # Thay thế bằng ID kênh của bạn
