@@ -51,6 +51,7 @@ def fetch_latest_news():
 
     return latest_posts
 
+
 async def send_to_discord(posts):
     # Kết nối tới kênh Discord và gửi tin nhắn
     channel = client.get_channel(int(CHANNEL_ID))
