@@ -1,5 +1,5 @@
 discord 
 asyncio
-pandas
+beautifulsoup4
 requests
 aiohttp
