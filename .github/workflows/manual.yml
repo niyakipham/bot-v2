@@ -36,9 +36,9 @@ jobs:
         run: pip install -r requirements.txt
       - name: Deploy bot
         run: |
-          python noitu.py 
+          python animenews.py &
+          python manganews.py 
           sleep 21600 # Giữ bot hoạt động trong 3600 giây (1 giờ)
         env:
-          NOITU_TOKEN: ${{ secrets.NOITU_TOKEN }}
-          UNIXPORN_TOKEN: ${{ secrets.UNIXPORN_TOKEN }}
-          NT: ${{ secrets.NT }}
+          ANIME_NEWS: ${{ secrets.ANIME_NEWS }}
+          MANGA_NEWS: ${{ secrets.MANGA_NEWS }}
