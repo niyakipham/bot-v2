@@ -85,4 +85,4 @@ async def on_ready():
     client.loop.create_task(check_for_new_posts())
 
 # Chạy bot Discord
-client.run(os.getenv(MANGA_NEWS))
+client.run(os.getenv('MANGA_NEWS'))
