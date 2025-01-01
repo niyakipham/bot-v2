@@ -36,9 +36,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Deploy bot
         run: |
-          python animenews.py &
-          python manganews.py 
+          python animenews.py & 
           sleep 21600 # Giữ bot hoạt động trong 3600 giây (1 giờ)
         env:
           ANIME_NEWS: ${{ secrets.ANIME_NEWS }}
-          MANGA_NEWS: ${{ secrets.MANGA_NEWS }}
