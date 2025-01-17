@@ -1,4 +1,3 @@
-
 import discord
 import os
 import requests
@@ -11,7 +10,6 @@ intents.messages = True  # Cho phép bot nhận sự kiện tin nhắn
 
 # Khởi tạo client Discord với intents
 client = discord.Client(intents=intents)
-
 
 CHANNEL_ID = '1313488832716603424'  # ID của kênh Discord để gửi thông tin
 
