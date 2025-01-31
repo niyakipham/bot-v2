@@ -16,6 +16,9 @@ CHANNEL_ID = '1313488832716603424'  # ID của kênh Discord để gửi thông 
 # URL trang web
 URL = 'https://kodoani.com/tin-tuc-anime'
 
+# Tập hợp để lưu trữ các bài viết đã gửi
+sent_posts = set()
+
 def fetch_latest_news():
     # Gửi yêu cầu HTTP để lấy dữ liệu trang web
     response = requests.get(URL)
@@ -55,14 +58,17 @@ async def send_to_discord(posts):
     # Kết nối tới kênh Discord và gửi tin nhắn
     channel = client.get_channel(int(CHANNEL_ID))
     for post in posts:
-        embed = discord.Embed(
-            title=post['title'],
-            url=post['link'],
-            description='THỂ LOẠI: TIN TỨC ANIME',
-            color=discord.Color.blue()
-        )
-        embed.set_image(url=post['image_url'])
-        await channel.send(embed=embed)
+        # Kiểm tra xem bài viết đã được gửi chưa
+        if post['link'] not in sent_posts:
+            embed = discord.Embed(
+                title=post['title'],
+                url=post['link'],
+                color=discord.Color.blue()
+            )
+            embed.set_image(url=post['image_url'])
+            await channel.send(embed=embed)
+            # Thêm bài viết vào danh sách đã gửi
+            sent_posts.add(post['link'])
 
 async def check_for_new_posts():
     while True:
