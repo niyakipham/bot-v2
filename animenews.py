@@ -11,7 +11,7 @@ intents.messages = True  # Cho phép bot nhận sự kiện tin nhắn
 # Khởi tạo client Discord với intents
 client = discord.Client(intents=intents)
 
-CHANNEL_ID = '1313488832716603424'  # ID của kênh Discord để gửi thông tin
+CHANNEL_ID = '1334849201422598167'  # ID của kênh Discord để gửi thông tin
 
 # URL trang web
 URL = 'https://kodoani.com/tin-tuc-anime'
@@ -63,7 +63,7 @@ async def send_to_discord(posts):
             embed = discord.Embed(
                 title=post['title'],
                 url=post['link'],
-                description='THỂ LOẠI: TIN TỨC ANIME',
+                description='',
                 color=discord.Color.blue()
             )
             embed.set_image(url=post['image_url'])
