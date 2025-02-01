@@ -11,7 +11,7 @@ intents.messages = True  # Cho phép bot nhận sự kiện tin nhắn
 # Khởi tạo client Discord với intents
 client = discord.Client(intents=intents)
 
-CHANNEL_ID = 1334849201422598167  # ID của kênh Discord để gửi thông tin
+CHANNEL_ID = '1313488832716603424'  # ID của kênh Discord để gửi thông tin
 
 # URL trang web
 URL = 'https://kodoani.com/tin-tuc-anime'
@@ -56,26 +56,20 @@ def fetch_latest_news():
 
 async def send_to_discord(posts):
     # Kết nối tới kênh Discord và gửi tin nhắn
-    channel = client.get_channel(CHANNEL_ID)
-    if channel:
-        for post in posts:
-            # Kiểm tra xem bài viết đã được gửi chưa
-            if post['link'] not in sent_posts:
-                # Tạo embed để hiển thị thông tin bài viết
-                embed = discord.Embed(
-                    title=post['title'],
-                    url=post['link'],
-                    color=discord.Color.blue()
-                )
-                embed.set_image(url=post['image_url'])
-
-                # Gửi thông báo với @everyone để phát hành thông báo
-                await channel.send("@everyone", embed=embed)
-
-                # Thêm bài viết vào danh sách đã gửi
-                sent_posts.add(post['link'])
-    else:
-        print(f"Không tìm thấy kênh với ID: {CHANNEL_ID}")
+    channel = client.get_channel(int(CHANNEL_ID))
+    for post in posts:
+        # Kiểm tra xem bài viết đã được gửi chưa
+        if post['link'] not in sent_posts:
+            embed = discord.Embed(
+                title=post['title'],
+                url=post['link'],
+                description='THỂ LOẠI: TIN TỨC ANIME',
+                color=discord.Color.blue()
+            )
+            embed.set_image(url=post['image_url'])
+            await channel.send(embed=embed)
+            # Thêm bài viết vào danh sách đã gửi
+            sent_posts.add(post['link'])
 
 async def check_for_new_posts():
     while True:
