@@ -37,7 +37,7 @@ jobs:
       - name: Deploy bot
         run: |
           python animenews.py & 
-          run.py 
+          python run.py &
           sleep 21600 # Giữ bot hoạt động trong 3600 giây (1 giờ)
         env:
           tk: ${{ secrets.tk }}
