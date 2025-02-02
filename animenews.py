@@ -1,20 +1,12 @@
-import discord
-import os
+import asyncio
 import requests
 from bs4 import BeautifulSoup
-import asyncio
 
-# Khởi tạo intents
-intents = discord.Intents.default()  # Đây là các intents mặc định
-intents.messages = True  # Cho phép bot nhận sự kiện tin nhắn
-
-# Khởi tạo client Discord với intents
-client = discord.Client(intents=intents)
-
-CHANNEL_ID = '1334849201422598167'  # ID của kênh Discord để gửi thông tin
+# URL Webhook Discord của bạn
+WEBHOOK_URL = os.getenv("tk")
 
 # URL trang web
-URL = 'https://kodoani.com/tin-tuc-anime'
+URL = 'https://kodoani.com/'
 
 # Tập hợp để lưu trữ các bài viết đã gửi
 sent_posts = set()
@@ -54,40 +46,40 @@ def fetch_latest_news():
 
     return latest_posts
 
-async def send_to_discord(posts):
-    # Kết nối tới kênh Discord và gửi tin nhắn
-    channel = client.get_channel(int(CHANNEL_ID))
+def send_to_discord_via_webhook(posts):
     for post in posts:
-        # Kiểm tra xem bài viết đã được gửi chưa
         if post['link'] not in sent_posts:
-            embed = discord.Embed(
-                title=post['title'],
-                url=post['link'],
-                description='',
-                color=discord.Color.blue()
-            )
-            embed.set_image(url=post['image_url'])
-            await channel.send(embed=embed)
-            # Thêm bài viết vào danh sách đã gửi
+            data = {
+                "embeds": [
+                    {
+                        "title": post['title'],
+                        "url": post['link'],
+                        "description": "",
+                        "color": 5814783,  # Màu xanh dương (decimal)
+                        "image": {"url": post['image_url']}
+                    }
+                ]
+            }
+            result = requests.post(WEBHOOK_URL, json=data)
+            try:
+                result.raise_for_status()
+            except requests.exceptions.HTTPError as err:
+                print(err)
+            else:
+                print("Payload delivered successfully, code {}.".format(result.status_code))
             sent_posts.add(post['link'])
 
 async def check_for_new_posts():
     while True:
-        # Lấy bài viết mới nhất và gửi lên Discord
         latest_posts = fetch_latest_news()
         if latest_posts:
-            await send_to_discord(latest_posts)
+            send_to_discord_via_webhook(latest_posts)
         else:
             print("Không có bài viết mới trong vòng 1 phút.")
-        
-        # Chờ 60 giây trước khi kiểm tra lại
         await asyncio.sleep(60)
 
-@client.event
-async def on_ready():
-    print(f'Logged in as {client.user}')
-    # Bắt đầu công việc kiểm tra mỗi phút
-    client.loop.create_task(check_for_new_posts())
+async def main():
+    await check_for_new_posts()
 
-# Chạy bot Discord
-client.run(os.getenv('ANIME_NEWS'))
+if __name__ == "__main__":
+    asyncio.run(main())
