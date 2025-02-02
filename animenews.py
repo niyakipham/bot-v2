@@ -1,5 +1,5 @@
 import discord
-import asyncio
+import asyncio, os
 import requests
 from bs4 import BeautifulSoup
 
