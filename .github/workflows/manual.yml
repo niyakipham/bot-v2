@@ -39,4 +39,4 @@ jobs:
           python animenews.py & 
           sleep 21600 # Giữ bot hoạt động trong 3600 giây (1 giờ)
         env:
-          ANIME_NEWS: ${{ secrets.ANIME_NEWS }}
+          tk: ${{ secrets.tk }}
