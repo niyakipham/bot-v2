@@ -1,4 +1,5 @@
 import discord
+import os 
 from discord.ext import commands
 
 # Thay thế YOUR_BOT_TOKEN bằng token bot thực tế của bạn
