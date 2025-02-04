@@ -40,4 +40,4 @@ async def on_message(message):
     await bot.process_commands(message)
 
 # Chạy bot
-bot.run(os.getenv("HA"))
+bot.run(os.getenv("RUN_GAME"))
