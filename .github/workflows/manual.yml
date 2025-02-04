@@ -44,5 +44,5 @@ jobs:
         env:
           tk: ${{ secrets.tk }}
           TOKEN: ${{ secrets.TOKEN }}
-          HA: ${{ secrets.HA }}
+          RUN_GAME: ${{ secrets.RUN_GAME }}
           GAME: ${{ secrets.GAME }}
