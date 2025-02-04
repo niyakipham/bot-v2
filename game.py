@@ -1,4 +1,4 @@
-import requests
+import requests, os
 from bs4 import BeautifulSoup
 from discord_webhook import DiscordWebhook, DiscordEmbed
 import time
